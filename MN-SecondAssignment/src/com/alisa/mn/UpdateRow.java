@@ -50,7 +50,7 @@ public class UpdateRow {
 			 
 		 
 			try {
-				statement.executeUpdate("insert into Class (ClassNumber, Building)"
+				statement.execute("insert into Class (ClassNumber, Building)"
 				           + " values"+"("+args[1]+","+"'"+args[2]+"'"+")");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

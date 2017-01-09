@@ -16,6 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.alisa.mn.Guis.AtThePlaceGUI;
+import com.alisa.mn.Guis.ClassGUI;
+import com.alisa.mn.Guis.CourseGUI;
+import com.alisa.mn.Guis.LecturerGUI;
+
 public class MainGui extends JPanel {
 
 	private JPanel _dynamicPanel;
@@ -82,65 +87,6 @@ public class MainGui extends JPanel {
 		}
 	}) ;
 	
-	//panelAddButtons.getGraphics();
-	/*
-	JButton addALecturer= new JButton("Add a Lecturer");
-	addALecturer.setPreferredSize(new Dimension(150, 50));
-	addALecturer.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			JPanel panelAddText=new JPanel();
-			JDialog dialog= new JDialog(panelAddButtons, "Add a course.");
-			BoxLayout boxText=new BoxLayout(panelAddText, BoxLayout.Y_AXIS);
-			JTextField text1=new JTextField("Please enter course lecturer ID:");
-			JTextField text2 =new JTextField("Please enter lecturer full name:");
-			JTextField text3 =new JTextField("Please enter lecturer phone number:");
-			JTextField text4 =new JTextField("Please enter lecturer address:");
-			panelAddText.add(text1);
-			panelAddText.add(text2);
-			panelAddText.add(text3);
-			panelAddText.add(text4);
-			pane.add(panelAddText,BorderLayout.CENTER);
-			String[] input={"Lecturer",text1.getText(),text2.getText(),text3.getText(),text4.getText()};
-			AddRow.main(input);
-		}
-	}) ;
-	panelAddButtons.add(addALecturer);
-	
-	JButton Class= new JButton("Add a class");
-	Class.setPreferredSize(new Dimension(150, 50));
-	Class.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			JPanel panelAddText=new JPanel();
-			BoxLayout boxText=new BoxLayout(panelAddText, BoxLayout.Y_AXIS);
-			JTextField text1=new JTextField("Please enter class number:");
-			JTextField text2 =new JTextField("Please enter building name:");
-	    	JButton submitbut=new JButton("submit");
-			panelAddText.add(text1);
-			panelAddText.add(text2);
-			panelAddText.add(submitbut);
-			pane.add(panelAddText,BorderLayout.CENTER);
-			submitbut.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					String[] input={"Class",text1.getText(),text2.getText()};
-					AddRow.main(input);
-				}
-			});
-			
-		}
-	}) ;
-	panelAddButtons.add(Class);
-	
-	*/
-	
-	//pane.add(panelAddButtons,BorderLayout.LINE_START);
 	}
 
 	private Component CreateButtonsShowAddEntriesPanel() {
@@ -197,7 +143,7 @@ public class MainGui extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				AtThePlace.main(null);
+				AtThePlaceGUI.main(null);
 			}
 		}) ;
 		panelbuttons.add(buttonSchedule);

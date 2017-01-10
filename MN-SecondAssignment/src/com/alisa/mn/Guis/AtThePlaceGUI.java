@@ -20,15 +20,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import com.alisa.mn.AddRow;
 import com.alisa.mn.DeleteRow;
 import com.alisa.mn.UpdateRow;
+import com.alisa.mn.db.AtThePlaceDB;
 
 public class AtThePlaceGUI extends Property {
 	
@@ -41,7 +44,36 @@ public class AtThePlaceGUI extends Property {
         super();
  
 }
+    
+    
+    
+    @Override
+    protected JButton createDeleteButton(){
+    	JButton button=new JButton("Delete row");
+    	
+    	button.addActionListener(new ActionListener() {
+    		
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
 
+    			int rowNum=_table.getSelectedRow();
+    			if(rowNum<0)
+    				return ;
+    			
+    			TableModel model = _table.getModel();
+    			
+    			try {
+					new AtThePlaceDB(model,rowNum).delete();
+					loadData();
+				} catch(Exception ex){
+					handleError(ex);
+				}
+    		   }
+    	});
+    	return button;
+
+    }
+    
     protected void doDelete(int id) {
 		String[] input={"AtThePlace",id+""};
 		DeleteRow.main(input);

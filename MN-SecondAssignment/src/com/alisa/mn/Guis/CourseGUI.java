@@ -62,6 +62,8 @@ protected Object[] readRow(ResultSet res) throws SQLException {
 
 @Override
 protected void doDelete(int rowId) {
+	//open window to change all the 
+	
 	String[] input={"Course",rowId+""};
 	DeleteRow.main(input);		
 }

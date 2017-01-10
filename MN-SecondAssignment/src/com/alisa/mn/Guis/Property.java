@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -42,6 +43,14 @@ public Property() {
             //Add the scroll pane to this panel.
             add(scrollPane,BorderLayout.CENTER);
 	}
+
+
+protected void handleError(Exception ex) {
+
+	JOptionPane.showMessageDialog(getFrame(this),
+		    ex.getMessage());
+	ex.printStackTrace();
+}
 
 protected static JFrame getFrame(Component component){
     	
@@ -171,7 +180,7 @@ protected abstract String getQueryString();
 
 protected abstract Object[] readRow(ResultSet res) throws SQLException ;
 
-private JButton createDeleteButton() {
+protected JButton createDeleteButton() {
 	
 	JButton button=new JButton("Delete row");
 	

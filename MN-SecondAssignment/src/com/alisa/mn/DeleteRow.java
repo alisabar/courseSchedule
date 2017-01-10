@@ -23,54 +23,53 @@ public static String driver = "com.mysql.jdbc.Driver";
 		}
 		else if(args[0].equals("Class"))
 		{
-			try {
-				String s="delete from Class "+
-				           
-						"where "+"ClassNumber="+args[1];
-				statement.executeUpdate(s);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	
-		 
+			deleteClass(statement, args);
 		}
-		else if(args[0].equals("Teaching"))
-		{
-			try {
-				String s="delete from Teaching "+
-				           
-						"where "+"LecturerID="+args[1]
-							+	" and "+"CourseID="+args[2]
-									+	" and "+"Date="+"'"+args[3]+"'";
-				statement.executeUpdate(s);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 
+		else if(args[0].equals("Teaching")){
+			deleteTeaching(statement, args);
+		}
+		else if(args[0].equals("AtThePlace")){
+				deleteAtThePlace(statement, args); 
 		}
 		
-		else if(args[0].equals("AtThePlace"))
-		{
-		
-				try {
-					String s="delete from AtThePlace "+
-					           
-							"where "+"LecturerID="+args[1]
-								+	" and "+"CourseID="+args[2]
-										+	" and "+"ClassNumber="+args[3]
-										+	" and "+"Date="+"'"+args[4]+"'"
-					   						+	" and "+"Time="+"'"+args[5]+"'";
-					statement.executeUpdate(s);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			 
-			}
-		 
-		
+	}
+	protected static void deleteClass(Statement statement, String[] args) {
+		try {
+			String s="delete from Class "+
+			           
+					"where "+"ClassNumber="+args[1];
+			statement.executeUpdate(s);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	protected static void deleteTeaching(Statement statement, String[] args) {
+		try {
+			String s="delete from Teaching "+
+			           
+					"where "+"LecturerID="+args[1]
+						+	" and "+"CourseID="+args[2]
+								+	" and "+"Date="+"'"+args[3]+"'";
+			statement.executeUpdate(s);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	protected static void deleteAtThePlace(Statement statement, String[] args) {
+		try {
+			String s="delete from AtThePlace "+
+			           
+					"where "+"LecturerID="+args[1]
+						+	" and "+"CourseID="+args[2]
+								+	" and "+"ClassNumber="+args[3]
+								+	" and "+"Date="+"'"+args[4]+"'"
+			   						+	" and "+"Time="+"'"+args[5]+"'";
+			statement.executeUpdate(s);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	protected static void DeleteLecturer(Statement statement, String[] args) {
 		try {

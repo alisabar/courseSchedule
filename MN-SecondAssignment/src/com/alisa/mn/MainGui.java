@@ -20,6 +20,7 @@ import com.alisa.mn.Guis.AtThePlaceGUI;
 import com.alisa.mn.Guis.ClassGUI;
 import com.alisa.mn.Guis.CourseGUI;
 import com.alisa.mn.Guis.LecturerGUI;
+import com.alisa.mn.db.AddRow;
 
 public class MainGui extends JPanel {
 

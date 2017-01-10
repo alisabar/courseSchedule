@@ -1,4 +1,4 @@
-package com.alisa.mn;
+package com.alisa.mn.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

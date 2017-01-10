@@ -1,4 +1,4 @@
-package com.alisa.mn;
+package com.alisa.mn.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -64,9 +64,6 @@ public static void addRow(Statement statement, String[] args)
 	
 	if(args[0].equals("AtThePlace"))
 	{
-	
-		 
-	 
 		try {
 			statement.executeUpdate(" insert into AtThePlace (LecturerID, CourseID,ClassNumber,Date,Time)"
 			        + " values ("+args[1]+","+args[2]+","+args[3]+","+"'"+args[4]+"'"+","+"'"+args[5]+"'"+")");

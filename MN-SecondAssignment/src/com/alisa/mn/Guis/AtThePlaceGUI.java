@@ -28,10 +28,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import com.alisa.mn.AddRow;
-import com.alisa.mn.DeleteRow;
-import com.alisa.mn.UpdateRow;
+import com.alisa.mn.db.AddRow;
 import com.alisa.mn.db.AtThePlaceDB;
+import com.alisa.mn.db.DeleteRow;
+import com.alisa.mn.db.UpdateRow;
 
 public class AtThePlaceGUI extends Property {
 	
@@ -43,9 +43,7 @@ public class AtThePlaceGUI extends Property {
     public AtThePlaceGUI() {
         super();
  
-}
-    
-    
+    }
     
     @Override
     protected JButton createDeleteButton(){
@@ -74,32 +72,27 @@ public class AtThePlaceGUI extends Property {
 
     }
     
-    protected void doDelete(int id) {
-		String[] input={"AtThePlace",id+""};
-		DeleteRow.main(input);
-	}
-    
     protected void openNew() {
 		
-		JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"Add a new row.");
+    	JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"Add a new row.");
 		DialogAddText.getContentPane().setLayout(new BoxLayout(DialogAddText.getContentPane(), BoxLayout.Y_AXIS));
 		
 		DialogAddText.getContentPane().add(new JLabel("Please enter Lecturer ID:"));
-		JTextField txtId=new JTextField();
+		JTextField txtLecturerId=new JTextField();
 		//txtId.setEnabled(false);
-		DialogAddText.getContentPane().add(txtId);
+		DialogAddText.getContentPane().add(txtLecturerId);
 		DialogAddText.getContentPane().add(new JLabel("Please enter Course ID:"));
-		JTextField courseId =new JTextField();
-		DialogAddText.getContentPane().add(courseId);
+		JTextField txtCourseId =new JTextField();
+		DialogAddText.getContentPane().add(txtCourseId);
 		DialogAddText.getContentPane().add(new JLabel("Please enter Class Number:"));
-		JTextField classNum =new JTextField();
-		DialogAddText.getContentPane().add(classNum);
+		JTextField txtClassNum =new JTextField();
+		DialogAddText.getContentPane().add(txtClassNum);
 		DialogAddText.getContentPane().add(new JLabel("Please enter Date:"));
-		JTextField date =new JTextField();
-		DialogAddText.getContentPane().add(date);
+		JTextField txtDate =new JTextField();
+		DialogAddText.getContentPane().add(txtDate);
 		DialogAddText.getContentPane().add(new JLabel("Please enter Time:"));
-		JTextField time =new JTextField();
-		DialogAddText.getContentPane().add(time);
+		JTextField txtTime =new JTextField();
+		DialogAddText.getContentPane().add(txtTime);
 		
 		JButton submitbut=new JButton("Submit");
 		DialogAddText.getContentPane().add(submitbut);
@@ -107,14 +100,24 @@ public class AtThePlaceGUI extends Property {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] input={"AtThePlace",txtId+"",courseId+"",classNum+"",date+"",time+""};
-				AddRow.main(input);
 				
-				//close window , from http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
-				DialogAddText.dispatchEvent(new WindowEvent(DialogAddText, WindowEvent.WINDOW_CLOSING));
 				
-				//refresh table
-				loadData();
+				try {
+					AtThePlaceDB newData = new AtThePlaceDB();
+					newData.lectureId=Integer.parseInt(txtLecturerId.getText());
+					newData.courseId=Integer.parseInt(txtCourseId.getText());
+					newData.classNumber=Integer.parseInt(txtClassNum.getText());
+					newData.date=txtDate.getText();
+					newData.time=txtTime.getText();
+
+					newData.insert();
+					
+					//refresh table
+					loadData();
+				} catch (Exception ex) {
+					handleError(ex);
+				}
+				
 			}
 		});
 		
@@ -125,18 +128,29 @@ public class AtThePlaceGUI extends Property {
 	}
 
     protected void openUpdate(int rowId) {
-		
-		JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"Adit course.");
+
+    	
+		AtThePlaceDB oldData = new AtThePlaceDB(_table.getModel(),rowId);
+
+    	JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"Add a new row.");
 		DialogAddText.getContentPane().setLayout(new BoxLayout(DialogAddText.getContentPane(), BoxLayout.Y_AXIS));
 		
-		DialogAddText.getContentPane().add(new JLabel("Course ID:"));
-		JTextField txtId=new JTextField();
-		txtId.setText(rowId+"");
-		txtId.setEnabled(false);
-		DialogAddText.getContentPane().add(txtId);
-		DialogAddText.getContentPane().add(new JLabel("Please edit course name:"));
-		JTextField txtName =new JTextField();
-		DialogAddText.getContentPane().add(txtName);
+		DialogAddText.getContentPane().add(new JLabel("Please enter Lecturer ID:"));
+		JTextField txtLecturerId=new JTextField();
+		//txtId.setEnabled(false);
+		DialogAddText.getContentPane().add(txtLecturerId);
+		DialogAddText.getContentPane().add(new JLabel("Please enter Course ID:"));
+		JTextField txtCourseId =new JTextField();
+		DialogAddText.getContentPane().add(txtCourseId);
+		DialogAddText.getContentPane().add(new JLabel("Please enter Class Number:"));
+		JTextField txtClassNum =new JTextField();
+		DialogAddText.getContentPane().add(txtClassNum);
+		DialogAddText.getContentPane().add(new JLabel("Please enter Date:"));
+		JTextField txtDate =new JTextField();
+		DialogAddText.getContentPane().add(txtDate);
+		DialogAddText.getContentPane().add(new JLabel("Please enter Time:"));
+		JTextField txtTime =new JTextField();
+		DialogAddText.getContentPane().add(txtTime);
 		
 		JButton submitbut=new JButton("Submit");
 		DialogAddText.getContentPane().add(submitbut);
@@ -144,12 +158,35 @@ public class AtThePlaceGUI extends Property {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] input={"Course",txtName.getText(),rowId+""};
-				UpdateRow.main(input);
+				
+				
+				try {
+
+					AtThePlaceDB newData = new AtThePlaceDB();
+					newData.lectureId=Integer.parseInt(txtLecturerId.getText());
+					newData.courseId=Integer.parseInt(txtCourseId.getText());
+					newData.classNumber=Integer.parseInt(txtClassNum.getText());
+					newData.date=txtDate.getText();
+					newData.time=txtTime.getText();
+					
+					oldData.delete();
+					newData.insert();
+				} catch (Exception ex) {
+					handleError(ex);
+				}
+				/*
+				String[] input=
+					{"AtThePlace"
+							,txtLecturerId+""
+							,txtCourseId+""
+							,txtClassNum+""
+							,txtDate+""
+							,txtTime+""};
+				AddRow.main(input);
 				
 				//close window , from http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
 				DialogAddText.dispatchEvent(new WindowEvent(DialogAddText, WindowEvent.WINDOW_CLOSING));
-				
+				*/
 				//refresh table
 				loadData();
 			}
@@ -186,5 +223,11 @@ public class AtThePlaceGUI extends Property {
         }
     });
 }
+
+	@Override
+	protected void doDelete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

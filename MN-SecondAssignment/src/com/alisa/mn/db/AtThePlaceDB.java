@@ -5,27 +5,33 @@ import java.sql.Statement;
 
 import javax.swing.table.TableModel;
 
+import org.apache.derby.client.am.SqlException;
+
 public class AtThePlaceDB extends classDBObjectBase
     {
-    	String lectureId; 
-    	String courseId; 
-		String classNumber; 
-		String date; 
-		String time;
+    	public int lectureId; 
+    	public int courseId; 
+    	public int classNumber; 
+    	public String date; 
+    	public String time;
+				
+		public AtThePlaceDB()
+		{
+			
+		}
 		
 		public AtThePlaceDB(TableModel model,int rowNum)
 		{
-			lectureId=model.getValueAt(rowNum, 0).toString();
-			courseId=model.getValueAt(rowNum, 1).toString();
-			classNumber=model.getValueAt(rowNum, 2).toString();
+			lectureId=Integer.parseInt(model.getValueAt(rowNum, 0).toString());
+			courseId=Integer.parseInt(model.getValueAt(rowNum, 1).toString());
+			classNumber=Integer.parseInt(model.getValueAt(rowNum, 2).toString());
 			date=model.getValueAt(rowNum, 3).toString();
 			time=model.getValueAt(rowNum, 4).toString();
 		}
 		
 		@Override
 		protected void update(Statement statement) {
-			// TODO Auto-generated method stub
-			
+							
 		}
 
 		@Override
@@ -41,9 +47,21 @@ public class AtThePlaceDB extends classDBObjectBase
 		}
 
 		@Override
-		protected void insert(Statement statement) {
-			// TODO Auto-generated method stub
+		protected void insert(Statement statement) throws SQLException {
 			
+			String sql=" insert into AtThePlace (LecturerID, CourseID,ClassNumber,Date,Time)"
+			        + " values ("+
+							lectureId
+							+","
+							+courseId
+							+","
+							+classNumber
+							+","
+							+"'"+date+"'"
+							+","
+							+"'"+time+"'"+")";
+			statement.executeUpdate(sql);
+
 		}
     }
    

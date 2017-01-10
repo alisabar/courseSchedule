@@ -24,9 +24,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.alisa.mn.AddRow;
-import com.alisa.mn.DeleteRow;
-import com.alisa.mn.UpdateRow;
+import com.alisa.mn.db.AddRow;
+import com.alisa.mn.db.DeleteRow;
+import com.alisa.mn.db.UpdateRow;
 
 public class LecturerGUI extends Property {
 	

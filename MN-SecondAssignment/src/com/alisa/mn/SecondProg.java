@@ -106,7 +106,6 @@ public class SecondProg {
 				 createAtThePlace(statement);
 				 
 				 
-		insertAtThePlace(statement);
 			
 		insertCourse(statement);
 		
@@ -193,7 +192,7 @@ public class SecondProg {
 		}
 		catch(Exception ex)
 		{
-			System.out.println("InsertTeaching failed "+ex.getMessage());
+			ex.printStackTrace();
 		}
 	}
 
@@ -268,6 +267,12 @@ public class SecondProg {
 				+ " values "+"("+"655478375"+","+"'Ofer Kaz'"+","+ "'03-76462'"+","+"'Eli Cohen 6 Tel Aviv'"+")");
 		statement.execute(" insert into Lecturer (LecturerID, FullName,PhoneNum,Address)"
 				+ " values "+"("+"765432987"+","+"'Myryam Shtern'"+","+ "'03-45590'"+","+"'Menahem Begin 3 Tel Aviv'"+")");
+		
+		statement.execute(" insert into Lecturer (LecturerID, FullName,PhoneNum,Address)"
+				+ " values "+"("+"655478975"+","+"'Alisa Barsky'"+","+ "'01-2345'"+","+"'Mavoe kalaniot 15 Ashkelon'"+")");
+		
+		
+		
 		System.out.println("Lecturer inserted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

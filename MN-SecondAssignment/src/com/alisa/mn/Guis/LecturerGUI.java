@@ -72,7 +72,6 @@ void openNew() {
 	
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer ID:"));
 	JTextField txtId=new JTextField();
-	//txtId.setEnabled(false);
 	DialogAddText.getContentPane().add(txtId);
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer full name:"));
 	JTextField txtName =new JTextField();
@@ -90,7 +89,7 @@ void openNew() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String[] input={"Lecturer",txtName.getText()};
+			String[] input={"Lecturer",txtId+"",txtName.getText(),phone+"",address.getText()};
 			AddRow.main(input);
 			
 			//close window , from http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe

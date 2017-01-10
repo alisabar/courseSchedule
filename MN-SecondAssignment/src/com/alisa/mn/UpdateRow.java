@@ -21,7 +21,7 @@ public class UpdateRow {
 				String s="UPDATE Course "
 				           + " SET"+" Name="+"'"+args[1]+"'"+
 						" where"+" CourseID="+args[2];
-				statement.executeUpdate(s);
+				statement.execute(s);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -38,7 +38,7 @@ public class UpdateRow {
 				           + " PhoneNum "+args[3]+","
 				           + " Address "+"'"+args[4]+"'"+","+
 						" where "+" LecturerID="+args[5];
-				statement.executeUpdate(" insert into Lecturer (LecturerID, FullName,PhoneNum,Address)"
+				statement.execute(" insert into Lecturer (LecturerID, FullName,PhoneNum,Address)"
 						+ " values"+ "("+args[1]+","+"'"+args[2]+"'"+","+args[3]+","+"'"+args[4]+"'"+")");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -50,7 +50,7 @@ public class UpdateRow {
 			 
 		 
 			try {
-				statement.execute("insert into Class (ClassNumber, Building)"
+				statement.execute(" insert into Class (ClassNumber, Building)"
 				           + " values"+"("+args[1]+","+"'"+args[2]+"'"+")");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -62,7 +62,7 @@ public class UpdateRow {
 			 
 		 
 			try {
-				statement.executeUpdate(" insert into Teaching (LecturerID, CourseID,  Date)"
+				statement.execute(" insert into Teaching (LecturerID, CourseID,  Date)"
 				        + " values"+"("+"655478965"+","+"03567"+","+ "'20161015'"+")");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -74,7 +74,7 @@ public class UpdateRow {
 				           + " CourseID "+args[2]+","
 				           + " Date "+"'"+args[3]+"'"+","+
 						" where"+" LecturerID="+args[5];
-				statement.executeUpdate(" insert into Lecturer (LecturerID, FullName,PhoneNum,Address)"
+				statement.execute(" insert into Lecturer (LecturerID, FullName,PhoneNum,Address)"
 						+ " values"+ "("+args[1]+","+"'"+args[2]+"'"+","+args[3]+","+"'"+args[4]+"'"+")");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -84,11 +84,9 @@ public class UpdateRow {
 		
 		if(args[0].equals("AtThePlace"))
 		{
-		
-			 
 		 
 			try {
-				statement.executeUpdate(" insert into AtThePlace (LecturerID, CourseID,ClassNumber,Date,Time)"
+				statement.execute(" insert into AtThePlace (LecturerID, CourseID,ClassNumber,Date,Time)"
 				        + " values ("+"655478965"+","+"03567"+","+"2101"+","+"'20161015'"+","+"'08:00:00'"+")");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

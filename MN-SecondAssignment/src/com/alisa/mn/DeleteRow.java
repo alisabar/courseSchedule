@@ -15,31 +15,11 @@ public static String driver = "com.mysql.jdbc.Driver";
 	{
 		if(args[0].equals("Course"))
 		{
-		  
-			 
-			try {
-				String s="Delete from Course "+
-				           
-						" where "+" CourseID="+args[1];
-				statement.executeUpdate(s);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			DeleteCourse(statement, args);
 		}
 		else if(args[0].equals("Lecturer"))
 		{
-			 
-			try {
-				String s="delete from Lecturer "+
-				           
-						"where "+"LecturerID="+args[1];
-				statement.executeUpdate(s);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	
+			DeleteLecturer(statement, args);
 		}
 		else if(args[0].equals("Class"))
 		{
@@ -91,6 +71,28 @@ public static String driver = "com.mysql.jdbc.Driver";
 			}
 		 
 		
+	}
+	protected static void DeleteLecturer(Statement statement, String[] args) {
+		try {
+			String s="delete from Lecturer "+
+			           
+					"where "+"LecturerID="+args[1];
+			statement.executeUpdate(s);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	protected static void DeleteCourse(Statement statement, String[] args) {
+		try {
+			String s="Delete from Course "+
+			           
+					" where "+" CourseID="+args[1];
+			statement.executeUpdate(s);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static void main(String[] args)
 		{

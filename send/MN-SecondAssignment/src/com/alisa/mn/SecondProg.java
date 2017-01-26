@@ -113,7 +113,7 @@ public class SecondProg {
 		
 		insertLecturer(statement);
 		
-		//insertTeaching(statement);
+		insertTeaching(statement);
 		
 		insertAtThePlace(statement);
 			

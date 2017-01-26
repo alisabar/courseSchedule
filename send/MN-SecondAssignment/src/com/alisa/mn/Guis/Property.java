@@ -29,32 +29,24 @@ public abstract class Property extends JPanel {
 public Property() {
 		super(new GridLayout(1,0));
 		
-		//Object[][] data = getData();
-        //String[] columnNames = getColumNames();
+		Object[][] data = getData();
+        String[] columnNames = getColumNames();
         
-        //_table = new JTable(data, columnNames);
-        _table = new JTable();
+        _table = new JTable(data, columnNames);
         _table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         _table.setFillsViewportHeight(true);
   
         JScrollPane scrollPane = new JScrollPane(_table);
         
            final JPanel topPanel=new JPanel();
-        	createButtons(topPanel);    
-           setLayout(new BorderLayout());
+        	    topPanel.add(createAddButton());
+        	    topPanel.add(createDeleteButton());
+        	    topPanel.add(createUpdateButton());
+            setLayout(new BorderLayout());
             add(topPanel,BorderLayout.NORTH);    
             //Add the scroll pane to this panel.
             add(scrollPane,BorderLayout.CENTER);
-            loadData();
 	}
-
-
-protected void createButtons(JPanel topPanel) {
-	topPanel.add(createAddButton());
-    topPanel.add(createDeleteButton());
-    topPanel.add(createUpdateButton());
-	
-}
 
 
 protected void handleError(Exception ex) {

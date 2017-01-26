@@ -54,15 +54,12 @@ public static void addRow(Statement statement, String[] args)
 		 
 	 
 		try {
-			statement.executeUpdate(" insert into Teaching (LecturerID, CourseID, Date)"
+			statement.executeUpdate(" insert into Teaching (LecturerID, CourseID,  Date)"
 			        + " values"+"("+args[1]+","+args[2]+","+"'"+args[3]+"'"+")");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 	
 	if(args[0].equals("AtThePlace"))

@@ -90,10 +90,13 @@ public class UpdateRow {
 		{
 			Connection connection = null;
 			Statement statement = null;
+		
+			
+			
 				 connection = null;
 				 try {
 					Class.forName(driver);
-					connection = DriverManager.getConnection(protocol);
+					 connection = DriverManager.getConnection(protocol);
 					 statement = connection.createStatement();
 				 } catch(Exception ex)
 						{

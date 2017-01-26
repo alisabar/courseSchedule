@@ -31,7 +31,6 @@ import javax.swing.table.DefaultTableModel;
 import com.alisa.mn.db.AddRow;
 import com.alisa.mn.db.DeleteRow;
 import com.alisa.mn.db.UpdateRow;
-//import com.alisa.mn.db.string;
 
 public class TeachingGui extends Property {
 	
@@ -47,14 +46,14 @@ public static void main(String[] args) {
 
 @Override
 String[] getColumNames() {
-	return new String[]{"LecturerID","LecturerFullName","CourseID","Date"};
+	return new String[]{"LecturerID","CourseID","Date"};
 }
 
 @Override
 protected String getQueryString() {
-	return "select Teaching.LecturerID, Lecturer.FullName, Teaching.CourseID, Teaching.Date From Lecturer, Teaching where Teaching.LecturerID=Lecturer.LecturerID";
-	
+	return "select * from Teaching";
 }
+
 protected int giveMeSelectedId(JTable table) {
 	return table.getSelectedRow();
 }
@@ -64,9 +63,7 @@ protected Object[] readRow(ResultSet res) throws SQLException {
 	int LecturerID=res.getInt("LecturerID");
 	int CourseID=res.getInt("CourseID");
 	Date date=res.getDate("Date");
-	String LecturerFullName=res.getString("FullName");
-	
-	return new Object[] {LecturerID,LecturerFullName,CourseID,date}; 
+	return new Object[] {LecturerID,CourseID,date}; 
 }
 
 @Override
@@ -92,6 +89,7 @@ public static class ComboItem
 	}
 }
 
+
 @Override
 void openNew() {
 	
@@ -113,8 +111,6 @@ void openNew() {
 	
 	JButton submitbut=new JButton("Submit");
 	DialogAddText.getContentPane().add(submitbut);
-	
-
     submitbut.addActionListener(new ActionListener() {
 		
     	

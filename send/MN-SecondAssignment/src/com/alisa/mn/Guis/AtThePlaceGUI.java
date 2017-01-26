@@ -1,7 +1,6 @@
 package com.alisa.mn.Guis;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -30,7 +29,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import com.alisa.mn.Guis.TeachingGui.ComboItem;
 import com.alisa.mn.db.AddRow;
 import com.alisa.mn.db.AtThePlaceDB;
 import com.alisa.mn.db.DeleteRow;
@@ -74,66 +72,7 @@ public class AtThePlaceGUI extends Property {
     	return button;
 
     }
-
-	@Override
-	protected void createButtons(JPanel topPanel) {
-		super.createButtons(topPanel);
-		JButton button = new JButton("nested query - classes");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				checkClasses();
-			}
-		});
-		topPanel.add(button);
-	}
-
-	
-void checkClasses()
-{
-	JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"select classrooms:");
-	DialogAddText.getContentPane().setLayout(new BoxLayout(DialogAddText.getContentPane(), BoxLayout.Y_AXIS));
-	
-
-	DialogAddText.getContentPane().add(new JLabel("Select Classroom you are interested in:"));
-	final JComboBox<ComboItem> cmbInclude = createCombo("Class","ClassNumber","ClassNumber");
-	DialogAddText.getContentPane().add(cmbInclude);
-	
-
-	DialogAddText.getContentPane().add(new JLabel("Select Classroom you are not interested in:"));
-	final JComboBox<ComboItem> cmbExclude = createCombo("Class","ClassNumber","ClassNumber");
-	DialogAddText.getContentPane().add(cmbExclude);
-	
-	JButton submitbut=new JButton("Submit");
-	DialogAddText.getContentPane().add(submitbut);
-	
-
-    submitbut.addActionListener(new ActionListener() {
-    	
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"selected classrooms");
-			DialogAddText.getContentPane().setLayout(new BoxLayout(DialogAddText.getContentPane(), BoxLayout.Y_AXIS));
-			
-			
-			DialogAddText.getContentPane().add(new SubqueryClass(
-					((ComboItem)cmbInclude.getSelectedItem()).id
-					,((ComboItem)cmbExclude.getSelectedItem()).id
-					));
-			
-			DialogAddText.setSize(600, 200);
-			DialogAddText.pack();
-			DialogAddText.setVisible(true);
-			
-		}
-	});
-	
-	DialogAddText.setSize(600, 200);
-	DialogAddText.pack();
-	DialogAddText.setVisible(true);
-
-}
+    
     protected void openNew() {
 		
     	JDialog DialogAddText= new JDialog(getFrame(AtThePlaceGUI.this),"Add a new row.");

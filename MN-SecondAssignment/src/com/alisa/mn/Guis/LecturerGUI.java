@@ -1,6 +1,7 @@
 package com.alisa.mn.Guis;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -39,7 +40,6 @@ public static void main(String[] args) {
         }
     });
 }
-
 @Override
 String[] getColumNames() {
 	return new String[]{"LecturerID","FullName","PhoneNum","Address"};
@@ -61,6 +61,53 @@ protected Object[] readRow(ResultSet res) throws SQLException {
 
 @Override
 protected void doDelete(int id) {
+	
+	//show warning
+		String warningMessage="selected Lecturer lecturerID="+id+" will bedeleted from schedule and teaching tables!";
+		if(!showWarningAreYouSure(warningMessage)){
+			return;
+		}
+		
+		//delete from Teaching
+		Statement statement=null;
+		try {
+			statement = getStatement();
+			statement.execute("delete from Teaching where LecturerID="+id);
+		} catch (Exception ex) {
+			handleError(ex);
+			return;
+		}
+		finally
+		{
+			if(statement!=null){
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		//delete from AtThePlace
+			try {
+				statement = getStatement();
+				statement.execute("delete from AtThePlace where LecturerID="+id);
+			} catch (Exception ex) {
+				handleError(ex);
+				return;
+			}
+			finally
+			{
+				if(statement!=null){
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+	
 	String[] input={"Lecturer",id+""};
 	DeleteRow.main(input);	
 }
@@ -71,14 +118,14 @@ void openNew() {
 	DialogAddText.getContentPane().setLayout(new BoxLayout(DialogAddText.getContentPane(), BoxLayout.Y_AXIS));
 	
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer ID:"));
-	JTextField txtId=new JTextField();
-	DialogAddText.getContentPane().add(txtId);
+	JTextField txtLecturerId=new JTextField();
+	DialogAddText.getContentPane().add(txtLecturerId);
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer full name:"));
 	JTextField txtName =new JTextField();
 	DialogAddText.getContentPane().add(txtName);
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer phone number:"));
-	JTextField phone =new JTextField();
-	DialogAddText.getContentPane().add(phone);
+	JTextField txtPhone =new JTextField();
+	DialogAddText.getContentPane().add(txtPhone);
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer address:"));
 	JTextField address =new JTextField();
 	DialogAddText.getContentPane().add(address);
@@ -89,7 +136,11 @@ void openNew() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String[] input={"Lecturer",txtId+"",txtName.getText(),phone+"",address.getText()};
+			String[] input={"Lecturer"
+					,txtLecturerId.getText()
+					,txtName.getText()
+					,txtPhone.getText()
+					,address.getText()};
 			AddRow.main(input);
 			
 			//close window , from http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
@@ -122,7 +173,6 @@ protected void openUpdate(int rowId) {
 	DialogAddText.getContentPane().add(txtName);
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer phone number:"));
 	JTextField phone =new JTextField();
-	txtId.setText(phone+"");
 	DialogAddText.getContentPane().add(phone);
 	DialogAddText.getContentPane().add(new JLabel("Please enter lecturer address:"));
 	JTextField address =new JTextField();
